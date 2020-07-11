@@ -42,3 +42,5 @@ app.listen(PORT,function(){
     console.log(`server is starting on port ${PORT}`);
     
 })
+
+console.log('hi');

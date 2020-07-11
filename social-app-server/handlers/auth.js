@@ -1,14 +1,14 @@
-const db = require('..models/');
+const db = require('../models');
 const jwt = require('jsonwebtoken');
 
 exports.signin = function name(params) {
 
     try {
-        let user = await db.user.findOne({
+        let user =  db.user.findOne({
             email: req.body.email
         });
         let { id, username, profileImageUrl } = user;
-        let isMatch = await user.comparePassword(req.body.password);
+        let isMatch =  user.comparePassword(req.body.password);
         if (isMatch) {
             let token = jwt.sign({
                 id: id,
@@ -39,7 +39,7 @@ exports.signin = function name(params) {
 }
 exports.signup = async function (req, res, next) {
     try {
-        let user = await db.user.create(req.body);
+        let user =  db.user.create(req.body);
         let { id, username, profileImageUrl } = user;
         let token = jwt.sign({
             id,
