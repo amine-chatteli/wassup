@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 export default class AuthForm extends Component {
     constructor(props) {
+        super(props)
         this.state = {
             email: "",
             username: "",
@@ -9,8 +10,14 @@ export default class AuthForm extends Component {
             profileImageUrl: ""
         };
     }
+    handleChange = e => {
+        this.setState({
+            [e.target.name]: e.target.value
+        })
+    }
     render() {
         const { email, username, password, profileImageUrl } = this.state;
+        const { heading, buttonText, signup } = this.props
         return (
             <div>
                 <div className="row justify-content-md-center text-center">
@@ -31,8 +38,27 @@ export default class AuthForm extends Component {
                                 className="form-control"
                                 id="password" name="password"
                                 onChange={this.handleChange}
-                                value={email}
                             />
+                            {signup && (
+                                <div>
+                                    <label htmlFor="username">User name:</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        id="username" name="username"
+                                        onChange={this.handleChange}
+                                        value={username}
+                                    />
+                                    <label htmlFor="image-url">Image:</label>
+                                    <input
+                                        type="password"
+                                        className="form-control"
+                                        id="image-url" name="profileImagrUrl"
+                                        onChange={this.handleChange} 
+                                    />
+
+                                </div>
+                            )}
                         </form>
                     </div>
                 </div>
