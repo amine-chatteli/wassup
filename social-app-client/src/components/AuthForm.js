@@ -15,6 +15,14 @@ export default class AuthForm extends Component {
             [e.target.name]: e.target.value
         })
     }
+    handleSubmit=e=>{
+        e.preventDefault();
+        const authType=this.props.signup? "signup":"signin";
+        this.props.onAuth(authType,this.state).then(()=>{
+                console.log('hi');
+                
+        })
+    }
     render() {
         const { email, username, password, profileImageUrl } = this.state;
         const { heading, buttonText, signup } = this.props
@@ -59,6 +67,7 @@ export default class AuthForm extends Component {
 
                                 </div>
                             )}
+                            <button type="submit" className="btn btn-primary btn-block btn-lg">{buttonText}</button>
                         </form>
                     </div>
                 </div>

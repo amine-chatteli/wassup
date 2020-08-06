@@ -10,8 +10,11 @@ const {loginRequired,ensureCorrectUser}=require("./middleware/auth");
 const { db } = require('./models/user');
 
 const PORT=8080;
-app.use(cors());
+app.use(cors());                            
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+  }));
 app.use('/api/auth',authRoutes);   
 app.use('api/users/:id/messages',
 loginRequired,
@@ -43,4 +46,4 @@ app.listen(PORT,function(){
     
 })
 
-console.log('hi');
+
