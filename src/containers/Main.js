@@ -3,10 +3,10 @@ import { Switch, Route, withRouter, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import Homepage from "../components/Homepage";
 import AuthForm from "../components/AuthForm";
-import {authUser} from "../store/actions/auth";
+import { authUser } from "../store/actions/auth";
 
 const Main = props => {
-    const {authUser}=props;
+    const { authUser,errors } = props;
     return (
         <div className="container">
             <Switch>
@@ -16,7 +16,13 @@ const Main = props => {
                     path="/signin"
                     render={props => {
                         return (
-                            <AuthForm onAuth={authUser} buttonText="Log in" heading="welcome back." {...props} />
+                            <AuthForm
+                                errors={errors}
+                                onAuth={authUser}
+                                buttonText="Log in"
+                                heading="welcome back."
+                                {...props}
+                            />
                         )
                     }}
                 />
@@ -25,7 +31,13 @@ const Main = props => {
                     path="/signup"
                     render={props => {
                         return (
-                            <AuthForm  onAuth={authUser} signup buttonText="sign me up" heading="Join the community today" {...props} />
+                            <AuthForm
+                                errors={errors}
+                                onAuth={authUser}
+                                signup buttonText="sign me up"
+                                heading="Join the community today"
+                                {...props}
+                            />
                         )
                     }}
                 />
@@ -36,7 +48,8 @@ const Main = props => {
 
 function mapStateToProps(state) {
     return {
-        currentUser: state.currentUser
+        currentUser: state.currentUser,
+        errors: state.errors
     };
 }
-export default withRouter(connect(mapStateToProps, {authUser})(Main));
+export default withRouter(connect(mapStateToProps, { authUser })(Main));
