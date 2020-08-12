@@ -15,25 +15,35 @@ export default class AuthForm extends Component {
             [e.target.name]: e.target.value
         })
     }
-    handleSubmit=e=>{
+    handleSubmit = e => {
         e.preventDefault();
-        
+
         console.log(this.state);
-        const authType=this.props.signup? "signup":"signin";
-        this.props.onAuth(authType,this.state).then(()=>{
-                
+        const authType = this.props.signup ? "signup" : "signin";
+        this.props.onAuth(authType, this.state).then(() => {
+
         })
     }
     render() {
         const { email, username, password, profileImageUrl } = this.state;
-        const { heading, buttonText, signup,errors } = this.props
+        const { heading,
+            buttonText,
+            signup,
+            errors,
+            history,
+            removeError
+        } = this.props;
+        history.listen(()=>{
+            removeError()
+        })
+
         return (
             <div>
                 <div className="row justify-content-md-center text-center">
                     <div className="col-md-6">
                         <form onSubmit={this.handleSubmit}>
                             <h2>{heading}</h2>
-                             {errors.message&&(<div className="alert alert-danger">{errors.message}</div>)}
+                            {errors.message && (<div className="alert alert-danger">{errors.message}</div>)}
                             <label htmlFor="email">Email:</label>
                             <input
                                 type="text"
@@ -64,7 +74,7 @@ export default class AuthForm extends Component {
                                         type="password"
                                         className="form-control"
                                         id="image-url" name="profileImagrUrl"
-                                        onChange={this.handleChange} 
+                                        onChange={this.handleChange}
                                     />
 
                                 </div>
