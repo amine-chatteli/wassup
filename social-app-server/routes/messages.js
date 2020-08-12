@@ -6,6 +6,8 @@ const {createMessage,
          deleteMessage
         }=require("../handlers/messages");
 
+
+        //prefix /api/users/:id/messages 
 router.route("/").post(createMessage);
 router
      .route("/:message_id")

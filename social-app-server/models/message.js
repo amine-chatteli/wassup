@@ -1,5 +1,5 @@
 const mongoose =require('mongoose');
-const User =require('./user');
+const user =require('./user');
 
 
 const messageSchema=new mongoose.Schema({
@@ -10,19 +10,19 @@ const messageSchema=new mongoose.Schema({
     },
     user:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"User"
+        ref:"user"
     }
 },{
     timestamps:true
 })
 messageSchema.pre('remove',async function(next){
     try {
-        let user =await User.findById(this.user);
-        user.message.remove(this.id);
-        await user.save();
+        let user =await User.findById(this.user); //find a user
+        user.message.remove(this.id); // remove message id from his message list
+        await user.save(); //save changes
     } catch (error) {
         return next(error)
     }
 })
-const Message=mongoose.model("Message",messageSchema);
+const Message=mongoose.model("message",messageSchema);
 module.exports=Message;

@@ -7,7 +7,7 @@ const errorHandler=require('./handlers/error');
 const authRoutes=require('./routes/auth');
 const messagesRoutes=require('./routes/messages');
 const {loginRequired,ensureCorrectUser}=require("./middleware/auth");
-const { db } = require('./models/user');
+const db = require('./models');
 
 const PORT=8080;
 app.use(cors());                            
@@ -15,14 +15,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
   }));
-app.use('/api/auth',authRoutes);   
-app.use('api/users/:id/messages',
-loginRequired,
+app.use('/api/auth',authRoutes);   //prefix for sign in and signup functions
+app.use('/api/users/:id/messages', //prefix for messages CRUD
+loginRequired,     //middleware
 ensureCorrectUser,
-messagesRoutes);
+messagesRoutes); 
 
-app.get("/api/messages",loginRequired,async function(req,res,next){
+//display messages sorted by date of creation
+app.get("/api/messages",loginRequired, async function(req,res,next){
     try {
+        console.log(db.message);
        let messages=await db.Message.find().sort({createdAt:"desc"})
        .populate("user",{
            username:true,
