@@ -1,6 +1,6 @@
-import { apiCall } from "../../services/api";
+import { apiCall,setTokenHeader } from "../../services/api";
 import { SET_CURRENT_USER } from "../actionTypes";
-import { add_error, remove_error, add_Error } from "./errors";
+import { removeError, addError } from "./errors";
 
 export function setCurrentUser(user) {
     return {
@@ -9,9 +9,13 @@ export function setCurrentUser(user) {
     };
 }
 
+export function setAuthorizationToken(token){
+    setTokenHeader(token);
+}
 export function logout(){
     return dispatch=>{
         localStorage.clear();
+        setAuthorizationToken(false);
         dispatch(setCurrentUser({}));
     }
 }
@@ -19,12 +23,13 @@ export function authUser(type, userData) {
     return dispatch => {
         return new Promise((resolve, reject) => {
             return apiCall('post', `/api/auth/${type}`, userData).then(({ token, ...user }) => {
-                localStorage.setItem('jwtToken', token)
+                localStorage.setItem('jwtToken', token);
+                setAuthorizationToken(token);
                 dispatch(setCurrentUser(user));
-                dispatch(remove_error())
+                dispatch(removeError())
                 resolve();
             }).catch(err=>{
-                dispatch (add_Error(err.message));
+                dispatch (addError(err.message));
                 reject(); //indicates that API call failed
             })
         });
