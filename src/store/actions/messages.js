@@ -1,6 +1,6 @@
 import { apiCall } from "../../services/api";
 import { addError } from "./errors";
-import { LOAD_MESSAGES, REMOVE_MESSAGE } from "../actionTypes";
+import { LOAD_MESSAGES, REMOVE_MESSAGE, REMOVE_ERROR } from "../actionTypes";
 
 export const loadMessages = messages => ({
   type: LOAD_MESSAGES,
