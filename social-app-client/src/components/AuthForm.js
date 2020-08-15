@@ -11,14 +11,13 @@ export default class AuthForm extends Component {
         };
     }
     handleChange = e => {
+        //populate state with form data
         this.setState({
             [e.target.name]: e.target.value
         })
     }
     handleSubmit = e => {
-        e.preventDefault();
-
-        console.log(this.state);
+        e.preventDefault(); //prevent default form behavious
         const authType = this.props.signup ? "signup" : "signin";
         this.props.onAuth(authType, this.state).then(() => {
             this.props.history.push("/"); 
@@ -60,8 +59,10 @@ export default class AuthForm extends Component {
                                 className="form-control"
                                 id="password" name="password"
                                 onChange={this.handleChange}
-                            />
-                            {signup && (
+                            /> 
+                            
+                            { //render these to additional fields if authtype is signup
+                            signup && (
                                 <div>
                                     <label htmlFor="username">User name:</label>
                                     <input
