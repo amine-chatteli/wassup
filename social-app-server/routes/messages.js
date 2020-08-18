@@ -12,6 +12,6 @@ router.route("/").post(createMessage);
 router
      .route("/:message_id")
      .get(getMessage)
-     .get(deleteMessage);
+     .delete(deleteMessage);
 
 module.exports=router;

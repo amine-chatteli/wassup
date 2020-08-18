@@ -23,7 +23,8 @@ try {
 };
 exports.getMessage=async function (req,res,next){
     try {  
-            let message=await db.message.find(req.params.message_id);
+       
+            let message=await db.Message.findById(req.params.message_id);
             return res.status(200).json(message)
         
     } catch (error) {
@@ -33,7 +34,7 @@ exports.getMessage=async function (req,res,next){
 };
 exports.deleteMessage=async function (req,res,next){
 try {
-    let foundMessage=await db.message.findById(req.params.message_id)
+    let foundMessage=await db.Message.findById(req.params.message_id)
     await foundMessage.remove();
     return res.status(200).json(foundMessage);
 } catch (error) {

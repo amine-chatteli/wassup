@@ -7,8 +7,10 @@ import { authUser } from "../store/actions/auth";
 import { removeError } from "../store/actions/errors";
 import withAuth from "../hocs/WithAuth";
 import MessageForm from "../containers/MessageForm";
+import MessageList from "./MessageList";
+import MessageTimeline from "../components/MessageTimeline";
 const Main = props => {
-    const { authUser, errors, removeError, currentUser } = props;
+    const { authUser, errors, removeError, currentUser,mymessages } = props;
     return (
         <div className="container">
             <Switch>
@@ -48,8 +50,14 @@ const Main = props => {
                 />
                 <Route
                     path="/users/:id/messages/new"
-                    component={withAuth(MessageForm)}
+                    component={withAuth(<MessageForm {...props}/>)}
                 />
+                 <Route
+                    path="/users/:id/messages/mymessages"
+                    component={withAuth(<MessageTimeline  currentUser={currentUser} mymessages/>)}
+                />
+                
+                
             </Switch>
         </div>
     )

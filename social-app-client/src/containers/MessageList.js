@@ -8,7 +8,11 @@ class MessageList extends Component {
     this.props.fetchMessages();
   }
   render() {
-    const { messages, removeMessage, currentUser } = this.props;
+    let { messages, removeMessage, currentUser,mymessages } = this.props;
+
+    if (mymessages) {
+      messages = messages.filter(m => m.user._id === currentUser);
+    }
     let messageList = messages.map(m => (
       <MessageItem
         key={m._id}
@@ -19,7 +23,9 @@ class MessageList extends Component {
         removeMessage={removeMessage.bind(this, m.user._id, m._id)}
         isCorrectUser={currentUser === m.user._id}
       />
+
     ));
+
     return (
       <div className="row col-sm-8">
         <div className="offset-1 col-sm-10">

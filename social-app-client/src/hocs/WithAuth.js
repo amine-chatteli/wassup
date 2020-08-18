@@ -15,7 +15,7 @@ export default function withAuth(ComponentToBeRendered) {
             }
         }
         render() {
-            return <ComponentToBeRendered {...this.props} />;
+            return ComponentToBeRendered ;
         }
     }
     function mapStateToProps(state) {
