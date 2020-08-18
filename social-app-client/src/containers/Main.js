@@ -56,7 +56,10 @@ const Main = props => {
                     path="/users/:id/messages/mymessages"
                     component={withAuth(<MessageTimeline  currentUser={currentUser} mymessages/>)}
                 />
-                
+                 <Route
+                    path="/api/users/:id/messages/:id"
+                    component={withAuth(<MessageForm update {...props}/>)}
+                />
                 
             </Switch>
         </div>

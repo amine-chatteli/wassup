@@ -16,12 +16,14 @@ class MessageList extends Component {
     let messageList = messages.map(m => (
       <MessageItem
         key={m._id}
+        messageId={m._id}
         date={m.createAt}
         text={m.text}
         username={m.user.username}
         profileImageUrl={m.user.profileImageUrl}
         removeMessage={removeMessage.bind(this, m.user._id, m._id)}
         isCorrectUser={currentUser === m.user._id}
+        currentUser={currentUser}
       />
 
     ));
