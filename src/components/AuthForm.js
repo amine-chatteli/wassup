@@ -74,7 +74,7 @@ export default class AuthForm extends Component {
                                     />
                                     <label htmlFor="image-url">Image:</label>
                                     <input
-                                        type="password"
+                                        type="text"
                                         className="form-control"
                                         id="image-url" name="profileImagrUrl"
                                         onChange={this.handleChange}

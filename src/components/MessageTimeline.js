@@ -5,10 +5,9 @@ import UserAside from "./UserAside";
 const MessageTimeline = props => {
     return (
         <div className="row">
-            <MessageList />
+            <MessageList {...props}  />
             <UserAside
-                profileImageUrl={props.profileImageUrl}
-                username={props.username} />
+                {...props} />
         </div>
     )
 }
