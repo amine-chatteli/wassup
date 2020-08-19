@@ -2,18 +2,18 @@ import React, { Component } from "react";
 import Moment from "react-moment";
 import { Link } from "react-router-dom";
 import DefaultProfileImg from "../images/default-profile-image.jpg";
-import  { useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 
 
 export default class MessageItem extends Component {
   constructor(props) {
     super(props);
     this.wrapperRef = React.createRef();
-  
+
     this.handleClickOutside = this.handleClickOutside.bind(this);
     this.state = {
       edited: false,
-      text: this.props.text
+      text: this.props.text,
     }
   }
   handleChange = e => {
@@ -24,18 +24,16 @@ export default class MessageItem extends Component {
   }
   componentDidMount() {
     document.addEventListener('mousedown', this.handleClickOutside);
-}
+  }
 
-componentWillUnmount() {
+  componentWillUnmount() {
     document.removeEventListener('mousedown', this.handleClickOutside);
-}
-  /**
-     * Alert if clicked on outside of element
-     */
-    handleClickOutside(event) {
-      if (this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
-          this.setState({edited:false});
-      }
+  }
+  // click outside message item to cancel editing
+  handleClickOutside(event) {
+    if (this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
+      this.setState({ edited: false });
+    }
   }
   render() {
     let { date,
@@ -47,13 +45,13 @@ componentWillUnmount() {
       removeMessage,
       updateMessage,
       isCorrectUser } = this.props;
-
+    //double click on message item to edit the message
     let theDisplayedText = <p>{text}</p>
     if (this.state.edited && isCorrectUser) {
       theDisplayedText = <p><input type="text" value={this.state.text} name="text" onChange={this.handleChange}></input></p>
     }
     return (
-      <div onDoubleClick={() => this.setState({ edited: true })}  ref={this.wrapperRef}>
+      <div onDoubleClick={() => this.setState({ edited: true })} ref={this.wrapperRef}>
         <li className="list-group-item">
           <img
             src={profileImageUrl || DefaultProfileImg}
@@ -71,13 +69,13 @@ componentWillUnmount() {
             </span>
             {theDisplayedText}
             {isCorrectUser && (
-              <div>
+              <div >
                 <a className="btn btn-danger" onClick={removeMessage}>
                   Delete
-         </a>
-                <button className="btn btn-success" >
+                </a>
+                <button style={{ display: this.state.edited ? 'block' : 'none' }} className="btn btn-success" >
                   update
-         </button>
+                 </button>
               </div>
             )}
           </div>
