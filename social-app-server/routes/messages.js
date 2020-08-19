@@ -3,7 +3,8 @@ const router=express.Router({mergeParams:true});
 
 const {createMessage,
          getMessage,
-         deleteMessage
+         deleteMessage,
+         updateMessage
         }=require("../handlers/messages");
 
 
@@ -12,6 +13,6 @@ router.route("/").post(createMessage);
 router
      .route("/:message_id")
      .get(getMessage)
-     .delete(deleteMessage);
-
+     .delete(deleteMessage)
+     .put(updateMessage);
 module.exports=router;
