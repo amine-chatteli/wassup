@@ -1,15 +1,18 @@
 import React, { Component } from "react";
 import Moment from "react-moment";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 import DefaultProfileImg from "../images/default-profile-image.jpg";
-import { useRef, useEffect } from "react";
+import { updateMessage} from "../store/actions/messages";
 
 
-export default class MessageItem extends Component {
+
+class MessageItem extends Component {
   constructor(props) {
     super(props);
     this.wrapperRef = React.createRef();
 
+    this.handleUpdate = this.handleUpdate.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
     this.state = {
       edited: false,
@@ -35,20 +38,34 @@ export default class MessageItem extends Component {
       this.setState({ edited: false });
     }
   }
+  handleUpdate = event => {
+    event.preventDefault();
+    this.props.updateMessage(this.props.current,this.props.messageId,this.state.text)
+    
+  }
+
+
   render() {
-    let { date,
-      id,
-      currentUser,
+    let {
+      date,
       profileImageUrl,
       text,
       username,
       removeMessage,
-      updateMessage,
-      isCorrectUser } = this.props;
+      isCorrectUser, } = this.props;
     //double click on message item to edit the message
     let theDisplayedText = <p>{text}</p>
     if (this.state.edited && isCorrectUser) {
-      theDisplayedText = <p><input type="text" value={this.state.text} name="text" onChange={this.handleChange}></input></p>
+      theDisplayedText =
+        <div>
+          <form onSubmit={this.handleUpdate}>
+            <input type="text" value={this.state.text} name="text" onChange={this.handleChange} autoComplete="off"/>
+            <input className="btn btn-success" type="submit" value="update" />
+          </form>
+        </div>
+
+
+
     }
     return (
       <div onDoubleClick={() => this.setState({ edited: true })} ref={this.wrapperRef}>
@@ -73,9 +90,7 @@ export default class MessageItem extends Component {
                 <a className="btn btn-danger" onClick={removeMessage}>
                   Delete
                 </a>
-                <button style={{ display: this.state.edited ? 'block' : 'none' }} className="btn btn-success" >
-                  update
-                 </button>
+
               </div>
             )}
           </div>
@@ -84,3 +99,11 @@ export default class MessageItem extends Component {
   }
 
 }
+
+function mapStateToProps(state) {
+  return {
+    errors: state.errors
+  };
+}
+
+export default connect(mapStateToProps, { updateMessage })(MessageItem);
