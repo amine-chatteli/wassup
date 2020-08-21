@@ -49,8 +49,12 @@ exports.updateMessage=async function (req,res,next){
             text: req.body.text
           }
         });
-       let  uptadedMessage =await db.Message.findById(req.params.message_id);
-        return res.status(200).json(uptadedMessage);
+        let messages=await db.Message.find().sort({createdAt:"desc"})
+        .populate("user",{
+            username:true,
+            profileImageUrl:true
+        });
+        return res.status(200).json(messages);
     } catch (error) {
         return next(error);
     }
