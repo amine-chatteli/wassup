@@ -1,11 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchMessages, removeMessage,updateMessage } from "../store/actions/messages";
+import { fetchUsers } from "../store/actions/users";
+
 import MessageItem from "../components/MessageItem";
 
 class MessageList extends Component {
   componentDidMount() {
     this.props.fetchMessages();
+    this.props.fetchUsers();
   }
   render() {
     let { messages, removeMessage, currentUser,myprofile } = this.props;
@@ -50,6 +53,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchMessages, removeMessage,updateMessage })(
+export default connect(mapStateToProps, { fetchMessages, removeMessage,updateMessage,fetchUsers})(
   MessageList
 );
