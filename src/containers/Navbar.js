@@ -29,9 +29,9 @@ class Navbar extends Component {
               </li>
               <li>
                 <Link
-                  to={`/users/${this.props.currentUser.user.id}/messages/mymessages`}
+                  to={`/users/${this.props.currentUser.user.id}/messages/myprofile`}
                 >
-                  My messages
+                  profile
                 </Link>
               </li>
               <li>

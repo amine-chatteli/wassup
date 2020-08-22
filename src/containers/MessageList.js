@@ -8,9 +8,9 @@ class MessageList extends Component {
     this.props.fetchMessages();
   }
   render() {
-    let { messages, removeMessage, currentUser,mymessages } = this.props;
+    let { messages, removeMessage, currentUser,myprofile } = this.props;
 
-    if (mymessages) {
+    if (myprofile) {
       messages = messages.filter(m => m.user._id === currentUser);
     }
     let messageList = messages.map(m => (
@@ -20,6 +20,7 @@ class MessageList extends Component {
         date={m.createAt}
         text={m.text}
         username={m.user.username}
+        userId={m.user._id}
         profileImageUrl={m.user.profileImageUrl}
         removeMessage={removeMessage.bind(this, m.user._id, m._id)}
         isCorrectUser={currentUser === m.user._id}

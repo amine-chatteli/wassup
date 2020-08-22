@@ -53,10 +53,13 @@ const Main = props => {
                     component={withAuth(<MessageForm {...props}/>)}
                 />
                  <Route
-                    path="/users/:id/messages/mymessages"
-                    component={withAuth(<MessageTimeline {...props} currentUser={currentUser} mymessages/>)}
+                    path="/users/:id/messages/myprofile"
+                    component={withAuth(<MessageTimeline {...props} currentUser={currentUser} myprofileb/>)}
                 />
-                
+                 <Route
+                    path="/users/:id/messages/profile"
+                    component={withAuth(<MessageTimeline {...props}  profile />)}
+                />
                 
             </Switch>
         </div>
