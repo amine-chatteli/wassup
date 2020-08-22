@@ -35,6 +35,17 @@ app.get("/api/messages",loginRequired, async function(req,res,next){
         return next(error)
     }
 })
+app.get("/api/users",loginRequired, async function(req,res,next){
+    try {
+       let users=await db.User.find()
+       .populate("Message",{
+           text:true
+       });
+       return res.status(200).json(users);
+    } catch (error) {
+        return next(error)
+    }
+})
 app.use(function(req,res,next){
     let err =new Error('Not found');
     err.status =404;

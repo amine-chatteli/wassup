@@ -40,7 +40,8 @@ class MessageItem extends Component {
   }
   handleUpdate = event => {
     event.preventDefault();
-    this.props.updateMessage(this.props.current,this.props.messageId,this.state.text)
+    let {messageId,current}=this.props
+    this.props.updateMessage(current,messageId,this.state.text)
     
   }
 
@@ -52,7 +53,7 @@ class MessageItem extends Component {
       text,
       username,
       removeMessage,
-      isCorrectUser, } = this.props;
+      isCorrectUser,userId } = this.props;
     //double click on message item to edit the message
     let theDisplayedText = <p>{text}</p>
     if (this.state.edited && isCorrectUser) {
@@ -78,19 +79,20 @@ class MessageItem extends Component {
             className="timeline-image"
           />
           <div className="message-area" >
-            <Link to="/">@{username} &nbsp;</Link>
+            <Link to={`/users/${this.props.userId}/messages/profile`}>@{username} &nbsp;</Link>
             <span className="text-muted">
               <Moment className="text-muted" format="Do MMM YYYY">
                 {date}
               </Moment>
             </span>
             {theDisplayedText}
+           
             {isCorrectUser && (
               <div >
                 <a className="btn btn-danger" onClick={removeMessage}>
                   Delete
                 </a>
-
+               
               </div>
             )}
           </div>
