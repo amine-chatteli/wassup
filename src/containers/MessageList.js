@@ -30,6 +30,7 @@ class MessageList extends Component {
         current={currentUser}
         updateMessage={updateMessage}
         fetchMessages={fetchMessages}
+        {...this.props}
       />
 
     ));
