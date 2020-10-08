@@ -9,6 +9,7 @@ import withAuth from "../hocs/WithAuth";
 import MessageForm from "../containers/MessageForm";
 import MessageList from "./MessageList";
 import MessageTimeline from "../components/MessageTimeline";
+import Profile from "../components/Profile";
 const Main = props => {
     const { authUser, errors, removeError, currentUser,mymessages } = props;
     return (
@@ -16,6 +17,9 @@ const Main = props => {
             <Switch>
                 <Route exact path="/"
                     render={props => <Homepage currentUser={currentUser} {...props} />}
+                />
+                 <Route  path="/profile/:username"
+                    render={props => <Profile currentUser={currentUser} {...props} />}
                 />
                 <Route
                     exact path="/signin"
@@ -49,18 +53,10 @@ const Main = props => {
                     }}
                 />
                 <Route
-                    path="/users/:id/messages/new"
+                    path="/messages/new"
                     component={withAuth(<MessageForm {...props}/>)}
                 />
-                 <Route
-                    path="/users/:id/messages/myprofile"
-                    component={withAuth(<MessageTimeline {...props} currentUser={currentUser} myprofileb/>)}
-                />
-                 <Route
-                    path="/users/:id/messages/profile"
-                    component={withAuth(<MessageTimeline {...props}  profile />)}
-                />
-                
+               
             </Switch>
         </div>
     )

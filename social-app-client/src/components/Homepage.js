@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import MessageTimeline from "./MessageTimeline"
 
 
-const Homepage = ({ currentUser }) => {
+const Homepage = props => {
+    const {currentUser}=props
     if (!currentUser.isAuthenticated) {
         return (
             <div className="home-hero">
@@ -15,8 +16,8 @@ const Homepage = ({ currentUser }) => {
     }
 return(
     <div>
-    <MessageTimeline
-     currentUser={currentUser}
+    <MessageTimeline {...props}
+    
     />
   </div>
 )

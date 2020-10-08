@@ -10,6 +10,8 @@ class Navbar extends Component {
     this.props.logout();
   };
   render() {
+    const {currentUser}=this.props
+    console.log(currentUser);
     return (
       <nav className="navbar navbar-expand">
         <div className="container-fluid">
@@ -18,18 +20,18 @@ class Navbar extends Component {
               <img src={Logo} alt="Warbler Home" />
             </Link>
           </div>
-          {this.props.currentUser.isAuthenticated ? (
+          {currentUser.isAuthenticated ? (
             <ul className="nav-navbar-nav navbar-right">
               <li>
                 <Link
-                  to={`/users/${this.props.currentUser.user.id}/messages/new`}
+                  to={`/messages/new`}
                 >
                   New Message
                 </Link>
               </li>
               <li>
                 <Link
-                  to={`/users/${this.props.currentUser.user.id}/messages/myprofile`}
+                  to={`/profile/${currentUser.user.username}`}
                 >
                   profile
                 </Link>

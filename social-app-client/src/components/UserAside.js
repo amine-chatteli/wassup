@@ -7,11 +7,18 @@ const UserAside = (props) => {
          <aside className="col-sm-2">
         <div className="panel panel-default">
             <div className="panel-body">
-                <img
-                    src={props.currentUser.user.profileImageUrl||DefaultProfileImg }
-                    alt={props.currentUser.user.username}
-                    className="img-thumbnail"
-                />
+               {
+                   props.userToVisit?
+                   <img
+                   src={props.userToVisit.profileImageUrl }
+                   alt={props.userToVisit.username}
+                   className="img-thumbnail"
+               /> : <img
+                   src={props.currentUser.user.profileImageUrl }
+                   alt={props.currentUser.user.username}
+                   className="img-thumbnail"
+               />
+               }
             </div>
         </div>
     </aside>
