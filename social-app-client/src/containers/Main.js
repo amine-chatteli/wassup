@@ -7,20 +7,22 @@ import { authUser } from "../store/actions/auth";
 import { removeError } from "../store/actions/errors";
 import withAuth from "../hocs/WithAuth";
 import MessageForm from "../containers/MessageForm";
-import MessageList from "./MessageList";
-import MessageTimeline from "../components/MessageTimeline";
 import Profile from "../components/Profile";
+import {selectCurrentUser,selectErrors} from '../store/selectors';
+import {createStructuredSelector} from 'reselect'
+
 const Main = props => {
-    const { authUser, errors, removeError, currentUser,mymessages } = props;
+    const { authUser, errors, removeError, currentUser, mymessages } = props;
+    const ProfileWithAuth = withAuth(Profile)
+
     return (
         <div className="container">
             <Switch>
-                <Route exact path="/"
+                <Route
+                    exact path="/"
                     render={props => <Homepage currentUser={currentUser} {...props} />}
                 />
-                 <Route  path="/profile/:username"
-                    render={props => <Profile currentUser={currentUser} {...props} />}
-                />
+
                 <Route
                     exact path="/signin"
                     render={props => {
@@ -52,20 +54,24 @@ const Main = props => {
                         )
                     }}
                 />
+                  <Route
+                    path="/profile/:username"
+                    render={props => (<ProfileWithAuth currentUser={currentUser} {...props} profile  />)}
+                />
                 <Route
                     path="/messages/new"
-                    component={withAuth(<MessageForm {...props}/>)}
+                    component={withAuth(MessageForm)}
                 />
-               
+
             </Switch>
         </div>
     )
 }
 
-function mapStateToProps(state) {
-    return {
-        currentUser: state.currentUser,
-        errors: state.errors
-    };
+const mapStateToProps=state=>createStructuredSelector({
+    currentUser: selectCurrentUser,
+    errors: selectErrors
 }
+) 
+
 export default withRouter(connect(mapStateToProps, { authUser, removeError })(Main));

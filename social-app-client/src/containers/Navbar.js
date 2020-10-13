@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { logout } from "../store/actions/auth";
+import {selectCurrentUser} from '../store/selectors'
+import {createStructuredSelector }from 'reselect'
 import Logo from "../images/warbler-logo.png";
 
 class Navbar extends Component {
@@ -11,7 +13,6 @@ class Navbar extends Component {
   };
   render() {
     const {currentUser}=this.props
-    console.log(currentUser);
     return (
       <nav className="navbar navbar-expand">
         <div className="container-fluid">
@@ -56,10 +57,8 @@ class Navbar extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    currentUser: state.currentUser
-  };
-}
+const mapStateToProps=state=>createStructuredSelector({
+  currentUser:selectCurrentUser
+})
 
 export default connect(mapStateToProps, { logout })(Navbar);
