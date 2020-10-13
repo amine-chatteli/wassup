@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { postNewMessage } from "../store/actions/messages";
+import { selectErrors } from "../store/selectors";
+import {createSelectorCreator, createStructuredSelector} from 'reselect'
 
 class MessageForm extends Component {
   constructor(props) {
@@ -37,10 +39,8 @@ class MessageForm extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    errors: state.errors
-  };
-}
+const  mapStateToProps=state=>createStructuredSelector({
+  errors:selectErrors
+})
 
 export default connect(mapStateToProps, { postNewMessage })(MessageForm);

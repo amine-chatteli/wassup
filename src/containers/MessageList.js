@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { fetchMessages, removeMessage,updateMessage } from "../store/actions/messages";
+import { fetchMessages, removeMessage, updateMessage } from "../store/actions/messages";
 import { fetchUsers } from "../store/actions/users";
+import {createStructuredSelector} from 'reselect';
+import {selectMessages,selectCurrentUser} from '../store/selectors'
 
 import MessageItem from "../components/MessageItem";
 
@@ -11,10 +13,10 @@ class MessageList extends Component {
     this.props.fetchUsers();
   }
   render() {
-    let { messages, removeMessage, currentUser,myprofile } = this.props;
+    let { messages, currentUser, userToVisit,profile } = this.props;
 
-    if (myprofile) {
-      messages = messages.filter(m => m.user._id === currentUser);
+    if (userToVisit) {
+      messages = messages.filter(m => m.user._id === userToVisit._id);
     }
     let messageList = messages.map(m => (
       <MessageItem
@@ -25,9 +27,9 @@ class MessageList extends Component {
         username={m.user.username}
         userId={m.user._id}
         profileImageUrl={m.user.profileImageUrl}
-        removeMessage={removeMessage.bind(this, m.user._id, m._id)}
-        isCorrectUser={currentUser === m.user._id}
-        current={currentUser}
+        removeMessage={removeMessage}
+        isCorrectUser={currentUser.user.id === m.user._id}
+        current={currentUser.user.id}
         updateMessage={updateMessage}
         fetchMessages={fetchMessages}
         {...this.props}
@@ -38,8 +40,9 @@ class MessageList extends Component {
     return (
       <div className="row col-sm-8">
         <div className="offset-1 col-sm-10">
+          
           <ul className="list-group" id="messages">
-            {messageList}
+            {  messageList}
           </ul>
         </div>
       </div>
@@ -47,13 +50,13 @@ class MessageList extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    messages: state.messages,
-    currentUser: state.currentUser.user.id
-  };
-}
+const  mapStateToProps=state=>createStructuredSelector(
+  {
+    messages: selectMessages,
+    currentUser: selectCurrentUser
+  }
+) 
 
-export default connect(mapStateToProps, { fetchMessages, removeMessage,updateMessage,fetchUsers})(
+export default connect(mapStateToProps, { fetchMessages, removeMessage, updateMessage, fetchUsers })(
   MessageList
 );

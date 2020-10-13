@@ -3,7 +3,9 @@ import Moment from "react-moment";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import DefaultProfileImg from "../images/default-profile-image.jpg";
-import { updateMessage} from "../store/actions/messages";
+import {createStructuredSelector} from 'reselect';
+import {selectErrors} from '../store/selectors'
+import { updateMessage } from "../store/actions/messages";
 
 
 
@@ -12,8 +14,6 @@ class MessageItem extends Component {
     super(props);
     this.wrapperRef = React.createRef();
 
-    this.handleUpdate = this.handleUpdate.bind(this);
-    this.handleClickOutside = this.handleClickOutside.bind(this);
     this.state = {
       edited: false,
       text: this.props.text,
@@ -33,41 +33,37 @@ class MessageItem extends Component {
     document.removeEventListener('mousedown', this.handleClickOutside);
   }
   // click outside message item to cancel editing
-  handleClickOutside(event) {
+  handleClickOutside=event=> {
     if (this.wrapperRef && !this.wrapperRef.current.contains(event.target)) {
       this.setState({ edited: false });
     }
   }
   handleUpdate = event => {
     event.preventDefault();
-    let {messageId,current}=this.props
-    this.props.updateMessage(current,messageId,this.state.text)
-    
+    let { messageId, current } = this.props
+    this.props.updateMessage(current, messageId, this.state.text);
+    this.setState({ edited: false });
   }
-
 
   render() {
     let {
+      messageId,
       date,
       profileImageUrl,
       text,
       username,
       removeMessage,
-      isCorrectUser,userId,match } = this.props;
+      isCorrectUser, userId, match } = this.props;
     //double click on message item to edit the message
-    console.log(match.path);
     let theDisplayedText = <p>{text}</p>
     if (this.state.edited && isCorrectUser) {
       theDisplayedText =
         <div>
           <form onSubmit={this.handleUpdate}>
-            <input type="text" value={this.state.text} name="text" onChange={this.handleChange} autoComplete="off"/>
+            <input type="text" value={this.state.text} name="text" onChange={this.handleChange} autoComplete="off" />
             <input className="btn btn-success" type="submit" value="update" />
           </form>
         </div>
-
-
-
     }
     return (
       <div onDoubleClick={() => this.setState({ edited: true })} ref={this.wrapperRef}>
@@ -87,13 +83,12 @@ class MessageItem extends Component {
               </Moment>
             </span>
             {theDisplayedText}
-           
+
             {isCorrectUser && (
               <div >
-                <a className="btn btn-danger" onClick={removeMessage}>
+                <a className="btn btn-danger" onClick={()=>removeMessage(userId,messageId)}>
                   Delete
                 </a>
-               
               </div>
             )}
           </div>
@@ -105,7 +100,7 @@ class MessageItem extends Component {
 
 function mapStateToProps(state) {
   return {
-    errors: state.errors
+    errors: selectErrors
   };
 }
 

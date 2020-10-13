@@ -14,7 +14,7 @@ const UserAside = (props) => {
                    alt={props.userToVisit.username}
                    className="img-thumbnail"
                /> : <img
-                   src={props.currentUser.user.profileImageUrl }
+                   src={props.currentUser.user.profileImageUrl}
                    alt={props.currentUser.user.username}
                    className="img-thumbnail"
                />

@@ -15,7 +15,7 @@ export const remove = id => ({
 
 
 export const removeMessage = (user_id, message_id) => {
-  console.warn('hi');
+ console.log(user_id,message_id);
   return dispatch => {
     return apiCall("delete", `/api/users/${user_id}/messages/${message_id}`)
       .then(() => dispatch(remove(message_id)))
@@ -46,7 +46,6 @@ export const postNewMessage = text => (dispatch, getState) => {
 };
 
 export const updateMessage=(user_id,message_id,text)=>{
-  console.log(user_id,message_id);
   return dispatch => {
     return apiCall("put", `/api/users/${user_id}/messages/${message_id}/`,{text})
     .then(res => {
