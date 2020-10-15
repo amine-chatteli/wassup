@@ -53,7 +53,7 @@ class MessageItem extends Component {
       text,
       username,
       removeMessage,
-      isCorrectUser, userId, match } = this.props;
+      isCorrectUser, userId } = this.props;
     //double click on message item to edit the message
     let theDisplayedText = <p>{text}</p>
     if (this.state.edited && isCorrectUser) {
@@ -76,7 +76,7 @@ class MessageItem extends Component {
             className="timeline-image"
           />
           <div className="message-area" >
-            <Link to={`/profile/${username}`}>@{username} &nbsp;</Link>
+            <Link to={`/profile/${userId}`}>@{username} &nbsp;</Link>
             <span className="text-muted">
               <Moment className="text-muted" format="Do MMM YYYY">
                 {date}

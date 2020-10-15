@@ -1,11 +1,11 @@
-import {LOAD_USERS} from "../actionTypes";
+import {LOAD_USER} from "../actionTypes";
 
-const users=(state=[],action)=>{
+const user=(state=[],action)=>{
     switch(action.type){
-        case LOAD_USERS:
-            return [...action.users];
+        case LOAD_USER:
+            return {...action.user};
         default:
             return state;
     }
 }
-export default users;
+export default user;

@@ -32,7 +32,7 @@ class Navbar extends Component {
               </li>
               <li>
                 <Link
-                  to={`/profile/${currentUser.user.username}`}
+                  to={`/profile/${currentUser.user.id}`}
                 >
                   profile
                 </Link>

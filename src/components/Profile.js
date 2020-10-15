@@ -7,14 +7,13 @@ import { selectTheUser } from '../store/selectors'
 const Profile = props => {
     return (
         <div className="row">
-            <MessageList {...props}  />
+            <MessageList {...props} />
             <UserAside
-                {...props} />
+                {...props} userToVisit={props.match.params.userId }
+                />
         </div>
     )
 }
 
-const mapStateToProps = (state, props) => ({
-    userToVisit: selectTheUser(props.match.params.username)(state)
-})
-export default connect(mapStateToProps)(Profile);
+
+export default Profile;
