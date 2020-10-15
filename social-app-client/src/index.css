@@ -52,3 +52,9 @@ ul.nav.navbar-nav li{
 #messages:not(.no-hover) .list-group-item:hover{
   background-color: #e6ecf0;
 }
+
+.follow{
+  color: blue;
+  border: none;
+  outline: none;
+}

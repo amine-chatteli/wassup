@@ -24,7 +24,8 @@ try {
 exports.getMessage=async function (req,res,next){
     try {  
        
-            let message=await db.Message.findById(req.params.message_id);
+            let message=await db.Message.findById(req.params.id);
+            console.log(req.params.id);
             return res.status(200).json(message)
         
     } catch (error) {

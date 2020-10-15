@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchMessages, removeMessage, updateMessage } from "../store/actions/messages";
-import { fetchUsers } from "../store/actions/users";
 import {createStructuredSelector} from 'reselect';
 import {selectMessages,selectCurrentUser} from '../store/selectors'
 
@@ -10,7 +9,6 @@ import MessageItem from "../components/MessageItem";
 class MessageList extends Component {
   componentDidMount() {
     this.props.fetchMessages();
-    this.props.fetchUsers();
   }
   render() {
     let { messages, currentUser, userToVisit,profile } = this.props;
@@ -57,6 +55,6 @@ const  mapStateToProps=state=>createStructuredSelector(
   }
 ) 
 
-export default connect(mapStateToProps, { fetchMessages, removeMessage, updateMessage, fetchUsers })(
+export default connect(mapStateToProps, { fetchMessages, removeMessage, updateMessage })(
   MessageList
 );

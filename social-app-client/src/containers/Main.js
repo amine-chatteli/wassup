@@ -55,7 +55,7 @@ const Main = props => {
                     }}
                 />
                   <Route
-                    path="/profile/:username"
+                    path="/profile/:userId"
                     render={props => (<ProfileWithAuth currentUser={currentUser} {...props} profile  />)}
                 />
                 <Route

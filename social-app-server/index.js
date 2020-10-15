@@ -17,12 +17,11 @@ app.use(bodyParser.urlencoded({
     extended: true
   }));
 app.use('/api/auth',authRoutes);   //prefix for sign in and signup functions
-app.use('/api/users/:id/messages', //prefix for messages CRUD
+app.use('/api/:id/messages', //prefix for messages CRUD
 loginRequired,     //middleware
 ensureCorrectUser,
 messagesRoutes); 
 app.use('/api/users/', 
-loginRequired,     
 usersRoutes); 
 //display messages sorted by date of creation
 app.get("/api/messages",loginRequired, async function(req,res,next){
@@ -38,17 +37,7 @@ app.get("/api/messages",loginRequired, async function(req,res,next){
         return next(error)
     }
 })
-app.get("/api/users",loginRequired, async function(req,res,next){
-    try {
-       let users=await db.User.find()
-       .populate("Message",{
-           text:true
-       });
-       return res.status(200).json(users);
-    } catch (error) {
-        return next(error)
-    }
-})
+
 app.use(function(req,res,next){
     let err =new Error('Not found');
     err.status =404;

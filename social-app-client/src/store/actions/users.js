@@ -1,22 +1,22 @@
 import { apiCall } from "../../services/api";
 import { addError } from "./errors";
-import { LOAD_USERS } from "../actionTypes";
+import { LOAD_USER } from "../actionTypes";
 
 
-export const loadUsers = users => ({
-    type: LOAD_USERS,
-    users
+export const loadUser = user => ({
+    type: LOAD_USER,
+    user
   });
 
-export const fetchUsers = () => {
-    console.log('hi');
+export const fetchUser = (id) => {
     return dispatch => {
-      return apiCall("get", "/api/users")
+      return apiCall("get",`/api/users/${id}`)
         .then(res => {
-          dispatch(loadUsers(res));
+          dispatch(loadUser(res));
+          console.log(res);
         })
         .catch(err => {
-          dispatch(addError(err.message));
+          dispatch(addError(err));
         });
     };
   };

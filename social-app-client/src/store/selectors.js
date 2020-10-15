@@ -12,3 +12,6 @@ export const selectCurrentUser=state=>state.currentUser
 export const selectErrors=state=>state.errors
 
 export const selectMessages = state => state.messages;
+
+
+export const selectUserToCheckProfile=state=>state.user?state.user:null
