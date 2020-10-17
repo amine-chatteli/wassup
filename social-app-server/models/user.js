@@ -22,7 +22,11 @@ const userSchema = new mongoose.Schema({
     messages:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Message'
-    }]
+    }],
+    followers:{
+        type:Array,
+    }
+
 })
 
 userSchema.pre('save', async function (next) {  

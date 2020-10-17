@@ -1,11 +1,26 @@
-import {LOAD_USER} from "../actionTypes";
+import { LOAD_USER, START_FETCHING, SUCCESS } from "../actionTypes";
 
-const user=(state=[],action)=>{
-    switch(action.type){
+const initialState = {
+    user:{},
+    fetching: false
+}
+
+const users = (state=initialState, action) => {
+    switch (action.type) {
+        case START_FETCHING:
+            return {
+                user:{},
+                fetching: true
+            }
+
         case LOAD_USER:
-            return {...action.user};
+            return { 
+                user:action.user,
+                fetching:false
+             };
+
         default:
             return state;
     }
 }
-export default user;
+export default users;

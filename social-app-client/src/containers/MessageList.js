@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fetchMessages, removeMessage, updateMessage } from "../store/actions/messages";
 import {createStructuredSelector} from 'reselect';
-import {selectMessages,selectCurrentUser} from '../store/selectors'
+import {selectMessages,selectCurrentUser,selectUserToCheckProfile} from '../store/selectors'
 
 import MessageItem from "../components/MessageItem";
 
@@ -11,11 +11,11 @@ class MessageList extends Component {
     this.props.fetchMessages();
   }
   render() {
-    let { messages, currentUser, userToVisit,profile } = this.props;
-
+    let { messages, currentUser, userToVisit,userToCheckProfile } = this.props;
     if (userToVisit) {
-      messages = messages.filter(m => m.user._id === userToVisit._id);
+      messages = messages.filter(m => m.user._id === userToVisit);
     }
+    
     let messageList = messages.map(m => (
       <MessageItem
         key={m._id}
@@ -51,7 +51,8 @@ class MessageList extends Component {
 const  mapStateToProps=state=>createStructuredSelector(
   {
     messages: selectMessages,
-    currentUser: selectCurrentUser
+    currentUser: selectCurrentUser,
+    userToCheckProfile:selectUserToCheckProfile
   }
 ) 
 
