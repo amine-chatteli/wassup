@@ -1,6 +1,6 @@
 import { apiCall } from "../../services/api";
 import { addError } from "./errors";
-import { LOAD_USER, START_FETCHING, SUCCESS } from "../actionTypes";
+import { LOAD_USER, START_FETCHING } from "../actionTypes";
 
 export const startFetching = () => ({
   type: START_FETCHING
@@ -23,3 +23,11 @@ export const fetchUser = (id) => {
       });
   };
 };
+
+export const follow =(idToFollow,currentUserName)=>{
+  return dispatch=>{
+    apiCall('put',`/api/users/${idToFollow}/${currentUserName}`)
+   dispatch( fetchUser(idToFollow))
+  }
+}
+

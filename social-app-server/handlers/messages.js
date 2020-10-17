@@ -43,7 +43,7 @@ try {
 };
 exports.updateMessage=async function (req,res,next){
     try {
-        let foundMessage=await db.Message.findByIdAndUpdate( req.params.message_id,
+        await db.Message.findByIdAndUpdate( req.params.message_id,
         {
           $set: {
             text: req.body.text

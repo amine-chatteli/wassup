@@ -20,3 +20,18 @@ exports.deleteUser = async function (req, res, next) {
         return next(error);
     }
 };
+
+exports.follow = async function (req, res, next) {
+    try {
+        let followed = await db.User.findByIdAndUpdate(req.params.id,
+            {
+                $push: {
+                    'followers': req.params.currentUserName
+                }
+            });
+        return res.status(200).json(followed);
+    } catch (error) {
+        return next(error);
+    }
+
+}

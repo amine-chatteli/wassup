@@ -1,11 +1,12 @@
 const express =require('express');
-const { getUser,deleteUser } = require('../handlers/users');
+const { getUser,deleteUser,follow } = require('../handlers/users');
 const router=express.Router({mergeParams:true});
 
 router
      .route("/:id")
      .get(getUser)
-     .delete(deleteUser);
+     .delete(deleteUser)
+router.put("/:id/:currentUserName",follow)
 
 
 module.exports=router;
