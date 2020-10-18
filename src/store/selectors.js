@@ -9,6 +9,8 @@ export const selectTheUser =username=> createSelector(
 
 export const selectUserToCheckProfile=state=>state.users.user
 export const selectFetching=state=>state.users.fetching
+export const selectShowFollowers=state=>state.users.showFollowers
+
 
 
 export const selectCurrentUser=state=>state.currentUser

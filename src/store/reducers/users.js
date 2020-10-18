@@ -1,8 +1,10 @@
-import { LOAD_USER, START_FETCHING, SUCCESS } from "../actionTypes";
+import { showFollowers } from "../actions/users";
+import { LOAD_USER, START_FETCHING, SHOW_FOLLOWERS } from "../actionTypes";
 
 const initialState = {
     user:{},
-    fetching: false
+    fetching: false,
+    showFollowers:false
 }
 
 const users = (state=initialState, action) => {
@@ -18,7 +20,11 @@ const users = (state=initialState, action) => {
                 user:action.user,
                 fetching:false
              };
-
+        case SHOW_FOLLOWERS:
+            return {
+                ...state,
+                showFollowers:!state.showFollowers
+            }
         default:
             return state;
     }

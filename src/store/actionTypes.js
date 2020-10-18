@@ -6,3 +6,4 @@ export const REMOVE_MESSAGE = "REMOVE_MESSAGE";
 export const  LOAD_USER="LOAD_USER";
 export const START_FETCHING="START_FETCHING";
 export const SUCCESS="SUCCESS";
+export const SHOW_FOLLOWERS="SHOW_FOLLOWERS";
