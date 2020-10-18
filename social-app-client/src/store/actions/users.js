@@ -27,7 +27,22 @@ export const fetchUser = (id) => {
 export const follow =(idToFollow,currentUserName)=>{
   return dispatch=>{
     apiCall('put',`/api/users/${idToFollow}/${currentUserName}`)
-   dispatch( fetchUser(idToFollow))
-  }
+    .then(res => {
+     console.log(res);
+     
+    })
+    .catch(err => {
+      dispatch(addError(err));
+    });
+};
+}
+export const unfollow =(idToUnfollow,currentUserName)=>{
+  console.log(idToUnfollow,currentUserName);
+  return dispatch=>{
+    apiCall('put',`/api/users/${idToUnfollow}/${currentUserName}/unfollow`)
+    .catch(err => {
+      dispatch(addError(err));
+    });
+};
 }
 

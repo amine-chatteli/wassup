@@ -1,5 +1,5 @@
 const express =require('express');
-const { getUser,deleteUser,follow } = require('../handlers/users');
+const { getUser,deleteUser,follow,unfollow } = require('../handlers/users');
 const router=express.Router({mergeParams:true});
 
 router
@@ -7,6 +7,6 @@ router
      .get(getUser)
      .delete(deleteUser)
 router.put("/:id/:currentUserName",follow)
-
+     .put("/:id/:currentUserName/unfollow",unfollow)
 
 module.exports=router;
