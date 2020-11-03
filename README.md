@@ -1,2 +1,2 @@
-# social-app
+# wassup
 social app using the MERN Stack !
