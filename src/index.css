@@ -1,64 +1,116 @@
 body {
- background-color: #e6ecf0;
-}
-.navbar{
-  margin-bottom: 1rem;
-}
-.navbar a{
-  font-weight: bold;
-}
-.navbar a:hover{
-  color: white;
-  text-decoration: underline;
-  cursor: pointer;
-}
-.navbar-brand>img{
-  display: inline-block;
-  width: 20px;
-  border-radius: 2px;
-  margin-bottom: 2px;
-  margin-right: 5px;
-}
-ul.nav.navbar-nav li{
-  margin:0 0.5rem;
-}
-.onboarding>.navbar{
-  background-image: url("./images/nav-bg.png");
-  background-size: 100% 100%;
-}
-.home-hero{
-  width: 100vw;
-  height:50vw;
-  position:absolute;
-  top:0;
-  left:0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: -1;
-  text-align: center;
-  padding: 1rem;
-  background-position: center center;
+  background-image: url('./images/baloon.png');
+  background-repeat: no-repeat;
   background-size: cover;
-}
 
-#messages .list-group-item{
-  display:flex;
-  align-items: flex-start;
-  padding: 7px 20px 12px;
-}
+  }
+  .navbar{
+   
+  }
+  .navbar a{
+    font-weight: bold;
+    
+  }
+  .navbar a:hover{
+    color: white;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .navbar-brand>img{
+    display: inline-block;
+    width: 20px;
+    border-radius: 2px;
+    margin-bottom: 2px;
+    margin-right: 5px;
+  }
+  ul.nav.navbar-nav li{
+    margin:0 0.5rem;
+  }
+  .onboarding>.navbar{
+    background-image: url("./images/nav-bg.png");
+    background-size: 100% 100%;
+  }
+  .home-hero{
+    width: 100vw;
+    height:50vw;
+    position:absolute;
+    top:0;
+    left:0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: -1;
+    text-align: center;
+    padding: 1rem;
+    background-position: center center;
+    background-size: cover;
+  }
+  
+  #messages .list-group-item{
+    display:flex;
+    align-items: flex-start;
+    padding: 7px 20px 12px;
+    border-radius:  50px 50px 50px 0    ;
+  }
+  
+  #messages .list-group-item img{
+  border-radius: 50%;
+  border: 1px solid lightskyblue;
+  margin-right: 8%;
+  }
+  
+  #messages:not(.no-hover) .list-group-item:hover{
+    background-color: #e6ecf0;
+  }
+  
+  .follow{
+    color: blue;
+    border: none;
+    outline: none;
+  }
+  
+  .background{
+    background-color: aqua;
+    width: 100%;
+    height: 100vh;
+    padding-top: 3rem;
+    background-color: #e6ecf0;
 
-#messages:not(.no-hover) .list-group-item:hover{
-  background-color: #e6ecf0;
-}
+  }
 
-.follow{
+  form{
+    margin-top: 100px;
+  }
+
+  .form-control{
+    margin: 30px auto;
+    background-color: transparent;
+    border: none;
+    color: black;
+    border-bottom: 1px solid black;
+    border-radius: 0px;
+  }
+  .form-control:focus{
+    background-color: transparent;
+  }
+  form button{
+    margin-top: 40px;
+  }
+
+.followers{
+  top: 40px;
+  position: relative;
+  right: 20px;
+  width: 200px;
+  display: flex;
+  flex-direction: row;
+  }
+.followers button{
+ width: 100px;
+  background-color: transparent;
   color: blue;
   border: none;
-  outline: none;
-}
+  font-weight: bold;
 
-.background{
-  background-color: aqua;
 }

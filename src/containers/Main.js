@@ -14,9 +14,9 @@ import {createStructuredSelector} from 'reselect'
 const Main = props => {
     const { authUser, errors, removeError, currentUser, mymessages } = props;
     const ProfileWithAuth = withAuth(Profile)
-
+    const background=currentUser.isAuthenticated?'background':''
     return (
-      <div className="background">
+      <div className={background}>
             <div className="container">
             <Switch>
                 <Route
