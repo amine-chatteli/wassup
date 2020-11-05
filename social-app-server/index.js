@@ -49,7 +49,7 @@ app.get("/api/users", async function(req,res,next){
     }
 })
 app.use(function(req,res,next){
-    let err =new Error('Not found');
+    let err =new Error('Not founded');
     err.status =404;
     next(err);
 })
