@@ -10,7 +10,7 @@ const usersRoutes=require('./routes/users');
 const {loginRequired,ensureCorrectUser}=require("./middleware/auth");
 const db = require('./models');
 
-const PORT=8080;
+const PORT=process.env.PORT||8080;
 app.use(cors());                            
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({

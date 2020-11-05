@@ -58,3 +58,7 @@ ul.nav.navbar-nav li{
   border: none;
   outline: none;
 }
+
+.background{
+  background-color: aqua;
+}
