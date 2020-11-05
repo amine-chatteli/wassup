@@ -66,7 +66,7 @@ class MessageItem extends Component {
         </div>
     }
     return (
-      <div onDoubleClick={() => this.setState({ edited: true })} ref={this.wrapperRef}>
+      <div onDoubleClick={() => this.setState({ edited: true })} ref={this.wrapperRef} >
         <li className="list-group-item">
           <img
             src={profileImageUrl || DefaultProfileImg}

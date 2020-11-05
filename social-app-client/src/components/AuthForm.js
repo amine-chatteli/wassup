@@ -20,8 +20,8 @@ export default class AuthForm extends Component {
         e.preventDefault(); //prevent default form behavious
         const authType = this.props.signup ? "signup" : "signin";
         this.props.onAuth(authType, this.state).then(() => {
-            this.props.history.push("/"); 
-        }).catch(()=>{
+            this.props.history.push("/");
+        }).catch(() => {
             return;
         })
     }
@@ -34,7 +34,7 @@ export default class AuthForm extends Component {
             history,
             removeError
         } = this.props;
-        history.listen(()=>{
+        history.listen(() => {
             removeError()
         })
 
@@ -45,43 +45,35 @@ export default class AuthForm extends Component {
                         <form onSubmit={this.handleSubmit}>
                             <h2>{heading}</h2>
                             {errors.message && (<div className="alert alert-danger">{errors.message}</div>)}
-                            <label htmlFor="email">Email:</label>
                             <input
                                 type="text"
                                 className="form-control"
                                 id="email" name="email"
                                 onChange={this.handleChange}
                                 value={email}
+                                placeholder="please Enter Your email"
                             />
-                            <label htmlFor="password">Password:</label>
                             <input
                                 type="password"
                                 className="form-control"
                                 id="password" name="password"
                                 onChange={this.handleChange}
-                            /> 
-                            
-                            { //render these to additional fields if authtype is signup
-                            signup && (
-                                <div>
-                                    <label htmlFor="username">User name:</label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        id="username" name="username"
-                                        onChange={this.handleChange}
-                                        value={username}
-                                    />
-                                    <label htmlFor="image-url">Image:</label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        id="image-url" name="profileImagrUrl"
-                                        onChange={this.handleChange}
-                                    />
+                                placeholder="please enter your password"
+                            />
 
-                                </div>
-                            )}
+                            { //render these to additional fields if authtype is signup
+                                signup && (
+                                    <div>
+                                        <input
+                                            type="text"
+                                            className="form-control"
+                                            id="username" name="username"
+                                            onChange={this.handleChange}
+                                            value={username}
+                                            placeholder="please enter a username"
+                                        />
+                                    </div>
+                                )}
                             <button type="submit" className="btn btn-primary btn-block btn-lg">{buttonText}</button>
                         </form>
                     </div>

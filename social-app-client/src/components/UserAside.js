@@ -34,20 +34,20 @@ class UserAside extends Component {
                             userToVisit ?
                                 <div>
                                     <img
-                                        src={userToCheckProfile.profileImageUrl}
+                                        src={userToCheckProfile.profileImageUrl||DefaultProfileImg}
                                         alt={userToCheckProfile.username}
                                         className="img-thumbnail"
                                     />
-                                    <div>
+                                    <div className="followers">
                         <button className='follow'onClick={()=>this.handleclick()} >{followButton}</button>
-                                       <button onClick={showFollowers}><span >followers:{followers}</span></button> 
+                        <button onClick={showFollowers}>{followers} followers</button> 
                                         {thisShowFollowers? followersList:null}
                                     </div>
                                 </div>
 
                                 : <div>
                                     <img
-                                        src={currentUser.user.profileImageUrl}
+                                        src={currentUser.user.profileImageUrl||DefaultProfileImg}
                                         alt={currentUser.user.username}
                                         className="img-thumbnail"
                                     />
