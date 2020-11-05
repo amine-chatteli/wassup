@@ -16,7 +16,8 @@ const Main = props => {
     const ProfileWithAuth = withAuth(Profile)
 
     return (
-        <div className="container">
+      <div className="background">
+            <div className="container">
             <Switch>
                 <Route
                     exact path="/"
@@ -65,6 +66,7 @@ const Main = props => {
 
             </Switch>
         </div>
+      </div>
     )
 }
 
