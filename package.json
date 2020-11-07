@@ -1,4 +1,5 @@
 {
+  "homepage": "http://amine-chatteli.github.io/wassup/social-app-client",
   "name": "social-app-client",
   "version": "0.1.0",
   "private": true,
@@ -21,12 +22,13 @@
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0"
   },
-  "proxy": "http://localhost:8080",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
